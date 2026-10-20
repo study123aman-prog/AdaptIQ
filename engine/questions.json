@@ -1,0 +1,518 @@
+{
+  "_meta": {
+    "description": "AdaptIQ starter question bank. Each question is a frame: it belongs to a topic, has a difficulty, a stem, 4 options, a 0-based answer_index, an explanation, and an optional 'misconception' id referencing the parent topic's common_misconceptions (the misconception a common wrong answer reveals). The explanation + misconception tags power the reasoning-trace / explainability layer.",
+    "difficulty_values": ["easy", "medium", "hard"]
+  },
+  "questions": [
+    {
+      "id": "arrays_q1",
+      "topic": "arrays",
+      "difficulty": "easy",
+      "stem": "What is the time complexity of accessing an element at a known index in an array?",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+      "answer_index": 0,
+      "explanation": "Arrays store elements in contiguous memory, so the address of index i is computed directly as base + i * element_size. That is constant time.",
+      "misconception": null
+    },
+    {
+      "id": "arrays_q2",
+      "topic": "arrays",
+      "difficulty": "medium",
+      "stem": "You insert a new element at the beginning of an array that already holds n elements. What is the time complexity?",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n^2)"],
+      "answer_index": 2,
+      "explanation": "Every existing element must shift one position to the right to make room, which is n shifts — O(n).",
+      "misconception": "arr_insert_o1"
+    },
+    {
+      "id": "arrays_q3",
+      "topic": "arrays",
+      "difficulty": "medium",
+      "stem": "What is the worst-case time to search for a given value in an unsorted array of n elements?",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+      "answer_index": 2,
+      "explanation": "With no ordering to exploit, you may have to examine every element, so searching is O(n). This is different from O(1) access by a known index.",
+      "misconception": "arr_access_search"
+    },
+    {
+      "id": "arrays_q4",
+      "topic": "arrays",
+      "difficulty": "easy",
+      "stem": "Which statement about arrays is TRUE?",
+      "options": [
+        "Accessing by index and searching for a value are both O(1).",
+        "Access by index is O(1), but searching for a value in an unsorted array is O(n).",
+        "Access by index is O(n) because you traverse from the start.",
+        "Inserting in the middle is O(1) because memory is contiguous."
+      ],
+      "answer_index": 1,
+      "explanation": "Indexed access is constant time, but locating a value without knowing its index requires a linear scan of an unsorted array.",
+      "misconception": "arr_access_search"
+    },
+
+    {
+      "id": "linked_lists_q1",
+      "topic": "linked_lists",
+      "difficulty": "easy",
+      "stem": "What is the time complexity to reach the k-th node in a singly linked list?",
+      "options": ["O(1)", "O(log k)", "O(k)", "O(n log n)"],
+      "answer_index": 2,
+      "explanation": "Linked lists have no random access; you must follow k pointers from the head, which is O(k).",
+      "misconception": "ll_random_access"
+    },
+    {
+      "id": "linked_lists_q2",
+      "topic": "linked_lists",
+      "difficulty": "medium",
+      "stem": "Given a pointer to the head, what is the time to insert a new node at the front of a singly linked list?",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n^2)"],
+      "answer_index": 0,
+      "explanation": "You create the node, point it at the current head, and update the head pointer — a constant number of operations regardless of list length.",
+      "misconception": null
+    },
+    {
+      "id": "linked_lists_q3",
+      "topic": "linked_lists",
+      "difficulty": "medium",
+      "stem": "Which is a genuine advantage of a linked list over a dynamic array?",
+      "options": [
+        "O(1) random access by index.",
+        "Better cache locality.",
+        "Insertion or deletion at a known node without shifting other elements.",
+        "Lower memory overhead per element."
+      ],
+      "answer_index": 2,
+      "explanation": "Because nodes are linked by pointers, inserting/deleting at a known position only rewires a couple of pointers — no shifting. (Arrays win on random access, cache locality, and per-element overhead.)",
+      "misconception": null
+    },
+    {
+      "id": "linked_lists_q4",
+      "topic": "linked_lists",
+      "difficulty": "hard",
+      "stem": "Which technique detects a cycle in a singly linked list using only O(1) extra space?",
+      "options": [
+        "Storing every visited node in a hash set.",
+        "Floyd's tortoise-and-hare (two pointers at different speeds).",
+        "Sorting the nodes by address.",
+        "Reversing the list twice."
+      ],
+      "answer_index": 1,
+      "explanation": "Floyd's algorithm advances one pointer by 1 and another by 2; if they ever meet, there is a cycle — all in constant extra space. A hash set works but uses O(n) space.",
+      "misconception": null
+    },
+
+    {
+      "id": "recursion_q1",
+      "topic": "recursion",
+      "difficulty": "easy",
+      "stem": "What does every correctly written recursive function need in order to terminate?",
+      "options": [
+        "A loop inside the function.",
+        "At least one base case.",
+        "A global counter.",
+        "Tail-call optimization."
+      ],
+      "answer_index": 1,
+      "explanation": "The base case stops the recursion. Without one (or with an unreachable one), the function calls itself forever and overflows the stack.",
+      "misconception": "rec_no_base"
+    },
+    {
+      "id": "recursion_q2",
+      "topic": "recursion",
+      "difficulty": "medium",
+      "stem": "A recursive function reaches a maximum recursion depth of d. Ignoring other allocations, what is its space complexity?",
+      "options": ["O(1)", "O(log d)", "O(d)", "O(d^2)"],
+      "answer_index": 2,
+      "explanation": "Each pending recursive call keeps a stack frame alive, so at depth d there are O(d) frames on the call stack.",
+      "misconception": "rec_free"
+    },
+    {
+      "id": "recursion_q3",
+      "topic": "recursion",
+      "difficulty": "medium",
+      "stem": "What is the minimum number of moves to solve the Tower of Hanoi with n disks?",
+      "options": ["n", "n log n", "2^n - 1", "n^2"],
+      "answer_index": 2,
+      "explanation": "The recurrence T(n) = 2*T(n-1) + 1 with T(1) = 1 solves to 2^n - 1 moves.",
+      "misconception": null
+    },
+    {
+      "id": "recursion_q4",
+      "topic": "recursion",
+      "difficulty": "hard",
+      "stem": "What is the time complexity of the naive recursive Fibonacci (fib(n) = fib(n-1) + fib(n-2)) with no memoization?",
+      "options": ["O(n)", "O(n log n)", "O(n^2)", "O(2^n)"],
+      "answer_index": 3,
+      "explanation": "The call tree branches twice at almost every node, giving exponential time (roughly O(1.618^n), bounded by O(2^n)). Memoization collapses it to O(n).",
+      "misconception": null
+    },
+
+    {
+      "id": "stacks_queues_q1",
+      "topic": "stacks_queues",
+      "difficulty": "easy",
+      "stem": "A stack follows which ordering discipline?",
+      "options": ["FIFO (first in, first out)", "LIFO (last in, first out)", "Sorted order", "Random order"],
+      "answer_index": 1,
+      "explanation": "A stack is Last-In-First-Out: the most recently pushed element is the first one popped.",
+      "misconception": "sq_order"
+    },
+    {
+      "id": "stacks_queues_q2",
+      "topic": "stacks_queues",
+      "difficulty": "easy",
+      "stem": "A queue follows which ordering discipline?",
+      "options": ["LIFO (last in, first out)", "FIFO (first in, first out)", "Sorted order", "Random order"],
+      "answer_index": 1,
+      "explanation": "A queue is First-In-First-Out: elements leave in the same order they arrived.",
+      "misconception": "sq_order"
+    },
+    {
+      "id": "stacks_queues_q3",
+      "topic": "stacks_queues",
+      "difficulty": "medium",
+      "stem": "Which task is naturally handled by a stack?",
+      "options": [
+        "Scheduling print jobs in arrival order.",
+        "Managing nested function calls (the call stack).",
+        "Serving customers in the order they lined up.",
+        "Level-order traversal of a tree."
+      ],
+      "answer_index": 1,
+      "explanation": "Function calls nest LIFO — the most recent call must return before its caller resumes — which is exactly stack behavior. The other three are FIFO/queue tasks.",
+      "misconception": "sq_order"
+    },
+    {
+      "id": "stacks_queues_q4",
+      "topic": "stacks_queues",
+      "difficulty": "easy",
+      "stem": "What is the time complexity of push and pop on a well-implemented stack?",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+      "answer_index": 0,
+      "explanation": "Both operations act only on the top of the stack, so they are constant time.",
+      "misconception": null
+    },
+
+    {
+      "id": "sorting_q1",
+      "topic": "sorting",
+      "difficulty": "easy",
+      "stem": "What is the worst-case time complexity of merge sort?",
+      "options": ["O(n)", "O(n log n)", "O(n^2)", "O(2^n)"],
+      "answer_index": 1,
+      "explanation": "Merge sort always splits the array in half (log n levels) and does O(n) work merging per level, giving O(n log n) in all cases.",
+      "misconception": null
+    },
+    {
+      "id": "sorting_q2",
+      "topic": "sorting",
+      "difficulty": "medium",
+      "stem": "What is the worst-case time complexity of quick sort?",
+      "options": ["O(n log n)", "O(n)", "O(n^2)", "O(log n)"],
+      "answer_index": 2,
+      "explanation": "With consistently poor pivots (e.g., already-sorted input with a naive pivot), partitions are maximally unbalanced, degrading to O(n^2). Its average case is O(n log n).",
+      "misconception": "sort_quick_worst"
+    },
+    {
+      "id": "sorting_q3",
+      "topic": "sorting",
+      "difficulty": "medium",
+      "stem": "Which of these sorting algorithms is NOT stable in its standard form?",
+      "options": ["Bubble sort", "Insertion sort", "Merge sort", "Quick sort"],
+      "answer_index": 3,
+      "explanation": "Standard quick sort can reorder equal keys during partitioning, so it is not stable. Bubble, insertion, and merge sort preserve the relative order of equal elements.",
+      "misconception": "sort_stable"
+    },
+    {
+      "id": "sorting_q4",
+      "topic": "sorting",
+      "difficulty": "hard",
+      "stem": "How much auxiliary (extra) space does standard merge sort use on arrays?",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+      "answer_index": 2,
+      "explanation": "Merging requires a temporary buffer proportional to the number of elements being merged, so standard array merge sort needs O(n) auxiliary space — it is not in-place.",
+      "misconception": "sort_merge_space"
+    },
+
+    {
+      "id": "hashing_q1",
+      "topic": "hashing",
+      "difficulty": "easy",
+      "stem": "What is the average-case time complexity of insert, lookup, and delete in a hash table?",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+      "answer_index": 0,
+      "explanation": "With a good hash function and a bounded load factor, these operations are expected constant time.",
+      "misconception": null
+    },
+    {
+      "id": "hashing_q2",
+      "topic": "hashing",
+      "difficulty": "medium",
+      "stem": "What is the worst-case time complexity of a hash table lookup?",
+      "options": ["O(1)", "O(log n)", "O(n)", "It can never be worse than O(1)"],
+      "answer_index": 2,
+      "explanation": "If many keys collide into one bucket (e.g., an adversarial or poor hash), a lookup may scan all of them, degrading to O(n).",
+      "misconception": "hash_always_o1"
+    },
+    {
+      "id": "hashing_q3",
+      "topic": "hashing",
+      "difficulty": "medium",
+      "stem": "Which is a valid strategy for resolving hash collisions?",
+      "options": [
+        "Separate chaining (a linked list per bucket).",
+        "Keeping the table permanently sorted.",
+        "Increasing the key length.",
+        "Ignoring the second key."
+      ],
+      "answer_index": 0,
+      "explanation": "Separate chaining stores colliding entries in a per-bucket list; open addressing (probing) is the other main family. Sorting or ignoring keys are not collision-resolution schemes.",
+      "misconception": null
+    },
+    {
+      "id": "hashing_q4",
+      "topic": "hashing",
+      "difficulty": "medium",
+      "stem": "Which statement about a standard hash table is TRUE?",
+      "options": [
+        "It keeps keys in sorted order.",
+        "It preserves insertion order of keys.",
+        "It provides no guarantee about the ordering of keys.",
+        "It supports range queries efficiently."
+      ],
+      "answer_index": 2,
+      "explanation": "Hashing scatters keys across buckets by hash value, so a standard hash table gives no ordering guarantees and does not support efficient range queries (a balanced BST would).",
+      "misconception": "hash_ordered"
+    },
+
+    {
+      "id": "trees_q1",
+      "topic": "trees",
+      "difficulty": "easy",
+      "stem": "In which order does an inorder traversal of a binary tree visit nodes?",
+      "options": ["Root, Left, Right", "Left, Root, Right", "Left, Right, Root", "Right, Root, Left"],
+      "answer_index": 1,
+      "explanation": "Inorder traversal recurses left, visits the current node, then recurses right (Left, Root, Right).",
+      "misconception": null
+    },
+    {
+      "id": "trees_q2",
+      "topic": "trees",
+      "difficulty": "medium",
+      "stem": "The height of a node in a tree is best defined as:",
+      "options": [
+        "The distance from the root to that node.",
+        "The number of children it has.",
+        "The length of the longest path from that node down to a leaf.",
+        "The total number of nodes below it."
+      ],
+      "answer_index": 2,
+      "explanation": "Height measures downward to the deepest leaf; depth measures upward to the root. Confusing the two is a common error.",
+      "misconception": "tree_height_depth"
+    },
+    {
+      "id": "trees_q3",
+      "topic": "trees",
+      "difficulty": "medium",
+      "stem": "Which data structure is used to implement a level-order (breadth-first) traversal of a tree?",
+      "options": ["A stack", "A queue", "A priority queue", "A hash table"],
+      "answer_index": 1,
+      "explanation": "Level-order traversal processes nodes in FIFO order, enqueuing children as it visits each node — a queue.",
+      "misconception": null
+    },
+    {
+      "id": "trees_q4",
+      "topic": "trees",
+      "difficulty": "medium",
+      "stem": "Which statement is TRUE about binary trees and binary search trees (BSTs)?",
+      "options": [
+        "Every binary tree is a BST.",
+        "Every BST is a binary tree, but not every binary tree is a BST.",
+        "A BST cannot have more than two children per node, but a binary tree can.",
+        "They are exactly the same thing."
+      ],
+      "answer_index": 1,
+      "explanation": "A BST is a binary tree that additionally satisfies the ordering property (left < node < right). So BST is a special case of binary tree.",
+      "misconception": "tree_binary_bst"
+    },
+
+    {
+      "id": "bst_q1",
+      "topic": "bst",
+      "difficulty": "easy",
+      "stem": "An inorder traversal of a binary search tree visits the elements in what order?",
+      "options": ["Reverse sorted order", "Sorted (ascending) order", "Level by level", "Insertion order"],
+      "answer_index": 1,
+      "explanation": "Because every left subtree holds smaller keys and every right subtree holds larger keys, inorder traversal (Left, Root, Right) yields ascending sorted order.",
+      "misconception": "bst_inorder"
+    },
+    {
+      "id": "bst_q2",
+      "topic": "bst",
+      "difficulty": "medium",
+      "stem": "What is the time complexity of searching in a balanced binary search tree with n nodes?",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+      "answer_index": 1,
+      "explanation": "In a balanced BST the height is O(log n), and search follows one root-to-leaf path, so it is O(log n).",
+      "misconception": null
+    },
+    {
+      "id": "bst_q3",
+      "topic": "bst",
+      "difficulty": "medium",
+      "stem": "What is the worst-case search time in a binary search tree that has become completely skewed (like a linked list)?",
+      "options": ["O(log n)", "O(1)", "O(n)", "O(sqrt(n))"],
+      "answer_index": 2,
+      "explanation": "A skewed BST has height n-1, so search degrades to O(n). This is why self-balancing trees (AVL, red-black) exist.",
+      "misconception": "bst_always_logn"
+    },
+    {
+      "id": "bst_q4",
+      "topic": "bst",
+      "difficulty": "medium",
+      "stem": "Where is the smallest key located in a non-empty binary search tree?",
+      "options": ["At the root", "At the leftmost node", "At the rightmost node", "At any leaf"],
+      "answer_index": 1,
+      "explanation": "Smaller keys always go left, so following left pointers until you cannot leads to the minimum. (The rightmost node holds the maximum.)",
+      "misconception": null
+    },
+
+    {
+      "id": "heaps_q1",
+      "topic": "heaps",
+      "difficulty": "easy",
+      "stem": "Structurally, a binary heap is which kind of tree?",
+      "options": ["A binary search tree", "A complete binary tree", "A balanced AVL tree", "A full ternary tree"],
+      "answer_index": 1,
+      "explanation": "A binary heap is a complete binary tree (all levels full except possibly the last, filled left to right), which is why it maps cleanly onto an array.",
+      "misconception": null
+    },
+    {
+      "id": "heaps_q2",
+      "topic": "heaps",
+      "difficulty": "medium",
+      "stem": "What is the time complexity of extract-min on a binary min-heap of n elements?",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+      "answer_index": 1,
+      "explanation": "Removing the root and restoring the heap property (sift-down) takes time proportional to the height, O(log n). Only peeking at the min is O(1).",
+      "misconception": "heap_peek_cost"
+    },
+    {
+      "id": "heaps_q3",
+      "topic": "heaps",
+      "difficulty": "easy",
+      "stem": "What is the time complexity of peeking at (reading, not removing) the minimum of a min-heap?",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+      "answer_index": 0,
+      "explanation": "The minimum is always at the root (index 0 in the array), so reading it is constant time.",
+      "misconception": null
+    },
+    {
+      "id": "heaps_q4",
+      "topic": "heaps",
+      "difficulty": "hard",
+      "stem": "What is the time complexity of building a heap from an unsorted array of n elements using the standard bottom-up build-heap?",
+      "options": ["O(n)", "O(log n)", "O(n log n)", "O(n^2)"],
+      "answer_index": 0,
+      "explanation": "Although each sift-down is O(log n), a tight analysis over all nodes (most are near the leaves) sums to O(n). Inserting one-by-one instead would be O(n log n).",
+      "misconception": null
+    },
+
+    {
+      "id": "graphs_q1",
+      "topic": "graphs",
+      "difficulty": "easy",
+      "stem": "Which data structure does breadth-first search (BFS) use to manage the frontier?",
+      "options": ["A stack", "A queue", "A heap", "A hash set only"],
+      "answer_index": 1,
+      "explanation": "BFS explores level by level, so it uses a FIFO queue to visit nearer vertices before farther ones.",
+      "misconception": "graph_bfs_dfs"
+    },
+    {
+      "id": "graphs_q2",
+      "topic": "graphs",
+      "difficulty": "easy",
+      "stem": "Depth-first search (DFS) is naturally implemented using which mechanism?",
+      "options": ["A queue", "A stack (or recursion)", "A priority queue", "A sorted array"],
+      "answer_index": 1,
+      "explanation": "DFS dives as deep as possible before backtracking, which matches LIFO behavior — an explicit stack or the recursion call stack.",
+      "misconception": "graph_bfs_dfs"
+    },
+    {
+      "id": "graphs_q3",
+      "topic": "graphs",
+      "difficulty": "medium",
+      "stem": "What is the space complexity of an adjacency-list representation of a graph with V vertices and E edges?",
+      "options": ["O(V)", "O(E)", "O(V + E)", "O(V^2)"],
+      "answer_index": 2,
+      "explanation": "You store every vertex plus an entry for every edge, giving O(V + E). An adjacency matrix would instead use O(V^2), wasteful for sparse graphs.",
+      "misconception": "graph_matrix_space"
+    },
+    {
+      "id": "graphs_q4",
+      "topic": "graphs",
+      "difficulty": "medium",
+      "stem": "Which algorithm finds the shortest path (fewest edges) between two vertices in an unweighted graph?",
+      "options": ["Depth-first search", "Breadth-first search", "Sorting the edges", "Inorder traversal"],
+      "answer_index": 1,
+      "explanation": "BFS visits vertices in order of increasing distance from the source, so the first time it reaches a vertex is via a shortest (fewest-edge) path.",
+      "misconception": "graph_bfs_dfs"
+    },
+
+    {
+      "id": "dynamic_programming_q1",
+      "topic": "dynamic_programming",
+      "difficulty": "easy",
+      "stem": "Which two properties must a problem have for dynamic programming to apply?",
+      "options": [
+        "Sorted input and unique elements.",
+        "Optimal substructure and overlapping subproblems.",
+        "A balanced tree and a hash table.",
+        "Constant space and a single loop."
+      ],
+      "answer_index": 1,
+      "explanation": "DP works when an optimal solution is built from optimal solutions of subproblems (optimal substructure) and those subproblems recur (overlapping subproblems), making caching worthwhile.",
+      "misconception": "dp_memo_only"
+    },
+    {
+      "id": "dynamic_programming_q2",
+      "topic": "dynamic_programming",
+      "difficulty": "medium",
+      "stem": "Memoization, as a dynamic-programming style, is best described as:",
+      "options": [
+        "A bottom-up approach that fills a table iteratively.",
+        "A top-down recursive approach that caches subproblem results.",
+        "A greedy approach that never revisits a choice.",
+        "A way to sort subproblems before solving them."
+      ],
+      "answer_index": 1,
+      "explanation": "Memoization keeps the natural recursion (top-down) but stores each subproblem's answer the first time it is computed. Tabulation is the bottom-up, iterative-table counterpart.",
+      "misconception": null
+    },
+    {
+      "id": "dynamic_programming_q3",
+      "topic": "dynamic_programming",
+      "difficulty": "medium",
+      "stem": "Adding memoization to the naive recursive Fibonacci reduces its time complexity from exponential to:",
+      "options": ["O(1)", "O(log n)", "O(n)", "O(n^2)"],
+      "answer_index": 2,
+      "explanation": "Each of the n distinct subproblems fib(0..n) is computed once and reused, so the total work is linear, O(n).",
+      "misconception": null
+    },
+    {
+      "id": "dynamic_programming_q4",
+      "topic": "dynamic_programming",
+      "difficulty": "hard",
+      "stem": "Why might a greedy algorithm fail on a problem that dynamic programming solves correctly (e.g., 0/1 knapsack)?",
+      "options": [
+        "Greedy is always slower than DP.",
+        "Locally optimal choices do not always combine into a globally optimal solution.",
+        "Greedy cannot use arrays.",
+        "DP does not require a base case."
+      ],
+      "answer_index": 1,
+      "explanation": "Greedy commits to the best immediate choice; when those choices do not compose into the global optimum (as in 0/1 knapsack), it can be wrong. DP explores the needed combinations of subproblem solutions.",
+      "misconception": "dp_vs_greedy"
+    }
+  ]
+}

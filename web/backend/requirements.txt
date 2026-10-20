@@ -1,0 +1,5 @@
+# AdaptIQ FastAPI backend dependencies
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+# The reasoning engine it wraps (../../engine) is pure Python — no extra deps.

@@ -1,0 +1,8 @@
+# AdaptIQ — runtime dependencies
+#
+# The reasoning engine itself (knowledge_base, bkt, logic_engine, rules,
+# planner, tutor_session) is PURE PYTHON and needs nothing here.
+# These are only for the UI and the visualisations:
+streamlit>=1.30      # the web UI (app.py)
+pandas>=2.0          # dashboard tables / charts (app.py)
+matplotlib>=3.7      # draw_graph.py and plot_mastery.py figures

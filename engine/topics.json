@@ -1,0 +1,247 @@
+{
+  "_meta": {
+    "description": "AdaptIQ knowledge base — DSA topic frames. Each topic is a frame with slots. The 'prerequisites' slot defines the prerequisite semantic net (a DAG). 'is_a' / 'part_of' / 'used_in' define the ontology relations. 'bkt_params' seed the Bayesian Knowledge Tracing engine.",
+    "bkt_params_legend": {
+      "p_init": "prior P(mastered) before any practice",
+      "p_learn": "P(transition to mastered) per practice opportunity",
+      "p_slip": "P(answer wrong | mastered)",
+      "p_guess": "P(answer right | not mastered)"
+    },
+    "difficulty_scale": "1 (foundational) .. 5 (advanced)"
+  },
+  "topics": [
+    {
+      "id": "arrays",
+      "name": "Arrays",
+      "category": "DataStructure",
+      "prerequisites": [],
+      "is_a": "linear_structure",
+      "used_in": ["sorting", "hashing", "heaps", "stacks_queues"],
+      "difficulty": 1,
+      "concepts": [
+        "contiguous memory layout",
+        "O(1) random access by index",
+        "fixed vs dynamic arrays",
+        "insertion/deletion cost and shifting",
+        "in-place two-pointer techniques"
+      ],
+      "common_misconceptions": [
+        {"id": "arr_insert_o1", "text": "Believing insertion/deletion in the middle of an array is O(1); it is O(n) because elements must shift."},
+        {"id": "arr_access_search", "text": "Confusing O(1) access by index with searching for a value, which is O(n) in an unsorted array."}
+      ],
+      "bkt_params": {"p_init": 0.40, "p_learn": 0.20, "p_slip": 0.10, "p_guess": 0.25}
+    },
+    {
+      "id": "linked_lists",
+      "name": "Linked Lists",
+      "category": "DataStructure",
+      "prerequisites": ["arrays"],
+      "is_a": "linear_structure",
+      "used_in": ["stacks_queues", "trees"],
+      "difficulty": 2,
+      "concepts": [
+        "nodes and pointers/references",
+        "singly vs doubly linked lists",
+        "O(1) insertion/deletion at a known node",
+        "no random access — O(n) traversal",
+        "cycle detection (Floyd's tortoise and hare)"
+      ],
+      "common_misconceptions": [
+        {"id": "ll_random_access", "text": "Assuming linked lists support O(1) indexed access like arrays; reaching the k-th node is O(k)."},
+        {"id": "ll_insert_cost", "text": "Thinking insertion is always O(1); it is O(1) only once you already hold the node/position, otherwise you pay O(n) to find it."}
+      ],
+      "bkt_params": {"p_init": 0.25, "p_learn": 0.18, "p_slip": 0.10, "p_guess": 0.22}
+    },
+    {
+      "id": "recursion",
+      "name": "Recursion",
+      "category": "Technique",
+      "prerequisites": ["arrays"],
+      "is_a": "problem_solving_technique",
+      "used_in": ["sorting", "trees", "dynamic_programming", "graphs"],
+      "difficulty": 2,
+      "concepts": [
+        "base case and recursive case",
+        "the call stack and stack frames",
+        "recursion vs iteration trade-offs",
+        "recurrence relations and their cost",
+        "tail recursion"
+      ],
+      "common_misconceptions": [
+        {"id": "rec_no_base", "text": "Forgetting or mis-stating the base case, leading to infinite recursion / stack overflow."},
+        {"id": "rec_free", "text": "Assuming recursion has no space cost; each pending call consumes a stack frame, so depth d uses O(d) space."}
+      ],
+      "bkt_params": {"p_init": 0.15, "p_learn": 0.12, "p_slip": 0.15, "p_guess": 0.20}
+    },
+    {
+      "id": "stacks_queues",
+      "name": "Stacks & Queues",
+      "category": "DataStructure",
+      "prerequisites": ["arrays", "linked_lists"],
+      "is_a": "linear_structure",
+      "used_in": ["graphs", "trees"],
+      "difficulty": 2,
+      "concepts": [
+        "LIFO (stack) vs FIFO (queue)",
+        "push/pop/peek and enqueue/dequeue in O(1)",
+        "array-backed vs linked-list-backed implementations",
+        "the call stack as a stack",
+        "circular queues and deques"
+      ],
+      "common_misconceptions": [
+        {"id": "sq_order", "text": "Mixing up LIFO and FIFO — expecting a stack to return the oldest element or a queue to return the newest."},
+        {"id": "sq_search", "text": "Trying to access the middle element directly; stacks and queues only expose their ends in O(1)."}
+      ],
+      "bkt_params": {"p_init": 0.25, "p_learn": 0.18, "p_slip": 0.10, "p_guess": 0.22}
+    },
+    {
+      "id": "sorting",
+      "name": "Sorting Algorithms",
+      "category": "Algorithm",
+      "prerequisites": ["arrays", "recursion"],
+      "is_a": "algorithm_family",
+      "used_in": ["bst", "graphs"],
+      "difficulty": 3,
+      "concepts": [
+        "comparison sorts: bubble, insertion, selection",
+        "divide-and-conquer: merge sort, quick sort",
+        "time complexity: O(n^2) vs O(n log n)",
+        "stability of sorting algorithms",
+        "in-place vs extra-space sorts"
+      ],
+      "common_misconceptions": [
+        {"id": "sort_quick_worst", "text": "Believing quick sort is always O(n log n); its worst case is O(n^2) with poor pivot choices."},
+        {"id": "sort_stable", "text": "Assuming all sorts are stable; quick sort and heap sort are not stable by default."},
+        {"id": "sort_merge_space", "text": "Thinking merge sort is in-place; standard merge sort needs O(n) auxiliary space."}
+      ],
+      "bkt_params": {"p_init": 0.20, "p_learn": 0.15, "p_slip": 0.12, "p_guess": 0.20}
+    },
+    {
+      "id": "hashing",
+      "name": "Hashing & Hash Tables",
+      "category": "DataStructure",
+      "prerequisites": ["arrays"],
+      "is_a": "associative_structure",
+      "used_in": ["graphs", "dynamic_programming"],
+      "difficulty": 3,
+      "concepts": [
+        "hash functions and uniform distribution",
+        "collisions: chaining vs open addressing",
+        "average O(1) vs worst-case O(n) operations",
+        "load factor and resizing/rehashing",
+        "hash sets and hash maps"
+      ],
+      "common_misconceptions": [
+        {"id": "hash_always_o1", "text": "Believing hash table lookups are always O(1); worst case degrades to O(n) under heavy collisions."},
+        {"id": "hash_ordered", "text": "Expecting hash tables to preserve insertion or sorted order; they do not, by design."}
+      ],
+      "bkt_params": {"p_init": 0.20, "p_learn": 0.16, "p_slip": 0.10, "p_guess": 0.22}
+    },
+    {
+      "id": "trees",
+      "name": "Trees & Binary Trees",
+      "category": "DataStructure",
+      "prerequisites": ["recursion", "linked_lists"],
+      "is_a": "hierarchical_structure",
+      "used_in": ["bst", "heaps", "graphs"],
+      "difficulty": 3,
+      "concepts": [
+        "root, parent, child, leaf, height, depth",
+        "binary trees and their properties",
+        "traversals: preorder, inorder, postorder, level-order",
+        "recursive structure of trees",
+        "complete vs full vs balanced trees"
+      ],
+      "common_misconceptions": [
+        {"id": "tree_height_depth", "text": "Confusing height (longest path to a leaf) with depth (distance from the root)."},
+        {"id": "tree_binary_bst", "text": "Assuming every binary tree is a binary search tree; BST requires the ordering property."}
+      ],
+      "bkt_params": {"p_init": 0.12, "p_learn": 0.12, "p_slip": 0.14, "p_guess": 0.20}
+    },
+    {
+      "id": "bst",
+      "name": "Binary Search Trees",
+      "category": "DataStructure",
+      "prerequisites": ["trees"],
+      "is_a": "binary_tree",
+      "used_in": [],
+      "difficulty": 3,
+      "concepts": [
+        "BST ordering property (left < node < right)",
+        "search, insert, delete in O(h)",
+        "inorder traversal yields sorted order",
+        "balanced vs skewed trees and why balance matters",
+        "self-balancing variants (AVL, red-black) at a high level"
+      ],
+      "common_misconceptions": [
+        {"id": "bst_always_logn", "text": "Believing BST operations are always O(log n); a skewed BST degrades to O(n)."},
+        {"id": "bst_inorder", "text": "Not realizing that an inorder traversal of a BST produces elements in sorted order."}
+      ],
+      "bkt_params": {"p_init": 0.12, "p_learn": 0.13, "p_slip": 0.12, "p_guess": 0.20}
+    },
+    {
+      "id": "heaps",
+      "name": "Heaps & Priority Queues",
+      "category": "DataStructure",
+      "prerequisites": ["trees", "arrays"],
+      "is_a": "complete_binary_tree",
+      "used_in": ["sorting", "graphs"],
+      "difficulty": 4,
+      "concepts": [
+        "min-heap and max-heap ordering property",
+        "array-backed complete binary tree representation",
+        "insert and extract-min/max in O(log n)",
+        "heapify and build-heap in O(n)",
+        "priority queue applications (Dijkstra, scheduling)"
+      ],
+      "common_misconceptions": [
+        {"id": "heap_sorted", "text": "Assuming a heap is fully sorted; it only guarantees the heap property between parent and children, not a total order."},
+        {"id": "heap_peek_cost", "text": "Thinking extract-min is O(1); only peek is O(1), extraction is O(log n) due to re-heapify."}
+      ],
+      "bkt_params": {"p_init": 0.10, "p_learn": 0.12, "p_slip": 0.13, "p_guess": 0.20}
+    },
+    {
+      "id": "graphs",
+      "name": "Graphs",
+      "category": "DataStructure",
+      "prerequisites": ["trees", "stacks_queues"],
+      "is_a": "non_linear_structure",
+      "used_in": [],
+      "difficulty": 4,
+      "concepts": [
+        "vertices, edges, directed vs undirected, weighted",
+        "adjacency list vs adjacency matrix trade-offs",
+        "BFS (queue) and DFS (stack/recursion)",
+        "shortest paths (Dijkstra, Bellman-Ford) at a high level",
+        "cycles, connectivity, topological sort"
+      ],
+      "common_misconceptions": [
+        {"id": "graph_bfs_dfs", "text": "Swapping BFS and DFS — BFS uses a queue and explores level by level; DFS uses a stack/recursion and goes deep first."},
+        {"id": "graph_matrix_space", "text": "Using an adjacency matrix for sparse graphs, wasting O(V^2) space where an adjacency list uses O(V+E)."}
+      ],
+      "bkt_params": {"p_init": 0.08, "p_learn": 0.10, "p_slip": 0.15, "p_guess": 0.18}
+    },
+    {
+      "id": "dynamic_programming",
+      "name": "Dynamic Programming",
+      "category": "Technique",
+      "prerequisites": ["recursion"],
+      "is_a": "problem_solving_technique",
+      "used_in": [],
+      "difficulty": 5,
+      "concepts": [
+        "optimal substructure",
+        "overlapping subproblems",
+        "memoization (top-down) vs tabulation (bottom-up)",
+        "defining the state and recurrence",
+        "classic problems: knapsack, LCS, coin change"
+      ],
+      "common_misconceptions": [
+        {"id": "dp_vs_greedy", "text": "Applying a greedy choice where DP is required — greedy fails when local optima do not compose into a global optimum."},
+        {"id": "dp_memo_only", "text": "Believing DP is just recursion with a cache; the essential ingredients are optimal substructure and overlapping subproblems."},
+        {"id": "dp_state", "text": "Failing to identify a correct state definition, leading to a recurrence that is wrong or exponential."}
+      ],
+      "bkt_params": {"p_init": 0.05, "p_learn": 0.08, "p_slip": 0.18, "p_guess": 0.18}
+    }
+  ]
+}
